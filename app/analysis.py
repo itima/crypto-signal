@@ -7,6 +7,7 @@ from strategies.breakout import Breakout
 from strategies.ichimoku_cloud import IchimokuCloud
 from strategies.relative_strength_index import RelativeStrengthIndex
 from strategies.moving_averages import MovingAverages
+from strategies.moving_avg_convergence_divergence import MovingAvgConvDiv
 
 class StrategyAnalyzer():
     """
@@ -15,6 +16,16 @@ class StrategyAnalyzer():
     def __init__(self, exchange_interface):
         self.exchange_interface = exchange_interface
         self.logger = structlog.get_logger()
+
+    def analyze_macd(self, market_pair, time_unit='1d'):
+        macd_analyzer = MovingAvgConvDiv()
+        historical_data = self.exchange_interface.get_historical_data(
+            market_pair=market_pair,
+            period_count=26,
+            time_unit=time_unit
+        )
+        macd_value = macd_analyzer.calculate_MACD_delta(historical_data)
+        return macd_value
 
     def analyze_breakout(self, market_pair, period_count=5, time_unit='5m'):
         breakout_analyzer = Breakout()
