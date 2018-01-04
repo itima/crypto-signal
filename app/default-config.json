@@ -4,11 +4,11 @@
     "symbol_pairs": [],
     "loglevel": "",
     "update_interval": 300,
-    "selected_task": "default"
+    "selected_task": "my"
   },
 
   "exchanges": {
-    "bittrex": {
+    "binance": {
       "required": {
         "enabled": true
       },
@@ -43,7 +43,7 @@
     },
     "integram": {
       "required": {
-        "url": ""
+        "url": "https://integram.org/cwVRVYBjDYC"
       }
     }
   },

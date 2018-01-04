@@ -32,7 +32,7 @@ class StrategyAnalyzer():
             period_count=period_count,
             time_unit=time_unit
         )
-        rsi_value = rsi_analyzer.find_rsi(historical_data, period_count)
+        rsi_value = rsi_analyzer.find_rsi(historical_data,  (len(historical_data) if len(historical_data) < period_count else period_count ))
         return rsi_value
 
     def analyze_moving_averages(self, market_pair, period_count=20, time_unit='5m'):
@@ -51,20 +51,22 @@ class StrategyAnalyzer():
         base_line_data = self.exchange_interface.get_historical_data(
             market_pair=market_pair,
             period_count=26,
-            time_unit='1d'
+            time_unit='4h'
         )
         conversion_line_data = self.exchange_interface.get_historical_data(
             market_pair=market_pair,
             period_count=9,
-            time_unit='1d'
+            time_unit='4h'
         )
         span_b_data = self.exchange_interface.get_historical_data(
             market_pair=market_pair,
             period_count=52,
-            time_unit='1d'
+            time_unit='4h'
         )
 
         leading_span_a = ic_analyzer.calculate_leading_span_a(base_line_data, conversion_line_data)
         leading_span_b = ic_analyzer.calculate_leading_span_b(span_b_data)
-        return leading_span_a, leading_span_b
+        tenkan = ic_analyzer.calculate_conversion_line(conversion_line_data)
+        kijun = ic_analyzer.calculate_base_line(base_line_data)
+        return leading_span_a, leading_span_b, tenkan, kijun
 
