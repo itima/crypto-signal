@@ -76,3 +76,15 @@ class RelativeStrengthIndex():
 
         rsi = 100 - (100 / (1 + rs))
         return rsi
+        
+    def is_overbought(self, rsi_value, overbought_threshold):
+        if overbought_threshold:
+            if rsi_value >= overbought_threshold:
+                return True
+        return False
+
+    def is_oversold(self, rsi_value, oversold_threshold):
+        if oversold_threshold:
+            if rsi_value <= oversold_threshold:
+                return True
+        return False

@@ -27,6 +27,7 @@ class StrategyAnalyzer():
         )
         macd_value = macd_analyzer.calculate_MACD_delta(historical_data)
         return macd_value
+        
     def analyze_breakout(self, market_pair, period_count=5, time_unit='5m'):
         breakout_analyzer = Breakout()
         historical_data = self.exchange_interface.get_historical_data(
