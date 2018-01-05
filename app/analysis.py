@@ -8,6 +8,7 @@ from strategies.ichimoku_cloud import IchimokuCloud
 from strategies.relative_strength_index import RelativeStrengthIndex
 from strategies.moving_averages import MovingAverages
 from strategies.moving_avg_convergence_divergence import MovingAvgConvDiv
+from strategies.bollinger_bands import BollingerBands
 
 class StrategyAnalyzer():
     """
@@ -77,7 +78,20 @@ class StrategyAnalyzer():
 
         leading_span_a = ic_analyzer.calculate_leading_span_a(base_line_data, conversion_line_data)
         leading_span_b = ic_analyzer.calculate_leading_span_b(span_b_data)
+
         tenkan = ic_analyzer.calculate_conversion_line(conversion_line_data)
         kijun = ic_analyzer.calculate_base_line(base_line_data)
         return leading_span_a, leading_span_b, tenkan, kijun
+
+    def analyze_bollinger_bands(self, market_pair, period_count=21, std_dev=2., time_unit='5m'):
+        bollingers = BollingerBands()
+
+        historical_data = self.exchange_interface.get_historical_data(
+            market_pair=market_pair,
+            period_count=period_count,
+            time_unit=time_unit
+        )
+
+        upper_band, lower_band = bollingers.get_bollinger_bands(historical_data, period=period_count, k=std_dev)
+        return upper_band, lower_band
 
