@@ -4,7 +4,7 @@
     "symbol_pairs": [],
     "loglevel": "",
     "update_interval": 300,
-    "selected_task": "my"
+    "selected_task": "default"
   },
 
   "exchanges": {

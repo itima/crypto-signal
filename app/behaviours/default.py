@@ -26,10 +26,10 @@ class DefaultBehaviour():
                     ichimoku_span_a, ichimoku_span_b, tenkan, kijun = strategy_analyzer.analyze_ichimoku_cloud(market_pairs[exchange][market_pair]['symbol'])
                     macd_value = strategy_analyzer.analyze_macd(market_pairs[exchange][market_pair]['symbol'])
                     if is_breaking_out:
-                        notifier.notify_all(message="{} is breaking out! https://www.coinigy.com/main/markets/BINA/{}".format(market_pair,market_pair))
+                        notifier.notify_all(message="{} is breaking out! ".format(market_pair))
                     
-                    if abs(tenkan-kijun) < 0.0000001 :
-                        notifier.notify_all(message="{} is crossing TK! https://www.coinigy.com/main/markets/BINA/{}".format(market_pair,market_pair))
+                    if abs(tenkan-kijun) < 0.000000000001 :
+                        notifier.notify_all(message="{} is crossing TK! ".format(market_pair))
 
                     print("{}: \tBreakout: {} \tRSI: {} \tSMA: {} \tEMA: {} \tIMA: {} \tIMB: {} \tITK: {} \tIKJ: {} \t ITKC: {} \tMACD: {}".format(
                         market_pair,

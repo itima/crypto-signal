@@ -27,7 +27,6 @@ class StrategyAnalyzer():
         )
         macd_value = macd_analyzer.calculate_MACD_delta(historical_data)
         return macd_value
-
     def analyze_breakout(self, market_pair, period_count=5, time_unit='5m'):
         breakout_analyzer = Breakout()
         historical_data = self.exchange_interface.get_historical_data(
@@ -63,17 +62,17 @@ class StrategyAnalyzer():
         base_line_data = self.exchange_interface.get_historical_data(
             market_pair=market_pair,
             period_count=26,
-            time_unit='4h'
+            time_unit='1h'
         )
         conversion_line_data = self.exchange_interface.get_historical_data(
             market_pair=market_pair,
             period_count=9,
-            time_unit='4h'
+            time_unit='1h'
         )
         span_b_data = self.exchange_interface.get_historical_data(
             market_pair=market_pair,
             period_count=52,
-            time_unit='4h'
+            time_unit='1h'
         )
 
         leading_span_a = ic_analyzer.calculate_leading_span_a(base_line_data, conversion_line_data)
